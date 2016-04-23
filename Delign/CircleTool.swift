@@ -2,10 +2,14 @@ import Foundation
 import UIKit
 
 class CircleTool: Tool {
+	static let name: String = "Circle"
+
 	private var startPoint: CGPoint?
 	private var activeCircleID: String?
 
 	private var changes: [Drawable] = []
+
+	required init() {}
 
 	func began(atPoint point: CGPoint, context: Workspace) -> Workspace {
 		let newCircle = CirclePrimitive(name: "Circle",

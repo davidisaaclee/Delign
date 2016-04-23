@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="9HL-fp-WZK">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="9HL-fp-WZK">
                                 <rect key="frame" x="40" y="530" width="94" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAP-W8-PKN">
@@ -27,7 +27,7 @@
                                             <action selector="undo" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="lkk-b2-AJ9"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRS-jP-bQA">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRS-jP-bQA">
                                         <rect key="frame" x="58" y="0.0" width="36" height="30"/>
                                         <state key="normal" title="Redo"/>
                                         <connections>
@@ -36,13 +36,59 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gGD-3R-alA">
+                                <rect key="frame" x="340" y="530" width="240" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Ydy-Dw-CLj"/>
+                                    <constraint firstAttribute="width" constant="240" id="cXJ-ab-5y9"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="aAh-sh-iaG">
+                                    <size key="itemSize" width="90" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ToolCell" id="kFm-IW-mxO" customClass="ToolCell" customModule="Delign" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="90" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2B-oe-lU7">
+                                                    <rect key="frame" x="24" y="14.5" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" red="0.85874155965655219" green="0.96334576245762349" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="k2B-oe-lU7" firstAttribute="centerX" secondItem="kFm-IW-mxO" secondAttribute="centerX" id="O92-Wm-DfA"/>
+                                            <constraint firstItem="k2B-oe-lU7" firstAttribute="centerY" secondItem="kFm-IW-mxO" secondAttribute="centerY" id="hTg-BZ-Rcp"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="label" destination="k2B-oe-lU7" id="bqF-H9-dJQ"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9HL-fp-WZK" secondAttribute="bottom" constant="40" id="BhE-EJ-WTK"/>
+                            <constraint firstAttribute="trailing" secondItem="gGD-3R-alA" secondAttribute="trailing" constant="20" id="RGF-EE-8De"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gGD-3R-alA" secondAttribute="bottom" constant="20" id="Vka-6i-ugN"/>
                             <constraint firstItem="9HL-fp-WZK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="40" id="ubB-pq-A0b"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="toolsetView" destination="gGD-3R-alA" id="tAa-tm-tpq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

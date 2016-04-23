@@ -5,7 +5,6 @@ import VectorKit
 struct Workspace {
 	var artboard: Artboard
 	var activeTool: Tool
-
 	var history: History
 }
 
