@@ -7,7 +7,7 @@ class CircleTool: Tool {
 	private var startPoint: CGPoint?
 	private var activeCircleID: String?
 
-	private var changes: [Drawable] = []
+	private var changes: [Object] = []
 
 	required init() {}
 

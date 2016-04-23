@@ -16,12 +16,10 @@ protocol Artboard: Named {
 
 /// A hierarchical object that can be drawn to a `CALayer`.
 protocol Drawable: Identifiable {
-	var children: [String: Drawable] { get set }
-
 	func drawSelf() -> CALayer
 }
 
-extension Drawable {
+extension Drawable where Self: Object {
 	func updateDrawing(drawing: Drawing?) -> Drawing {
 		let updatedLayer = self.drawSelf()
 		let children: [String: Drawing] = self.children
@@ -50,7 +48,9 @@ protocol Drawing {
 
 
 /// A spatial object to be positioned on an artboard.
-protocol Object: Named, Identifiable, Transformable, Drawable {}
+protocol Object: Named, Identifiable, Transformable, Drawable {
+	var children: [String: Object] { get set }
+}
 
 /// Describes something which can be translated.
 protocol Transformable {

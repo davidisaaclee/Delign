@@ -6,7 +6,7 @@ struct CirclePrimitive: Object {
 	var id: String
 
 	var name: String
-	var children: [String: Drawable]
+	var children: [String: Object]
 
 	var positionX: Property
 	var positionY: Property
@@ -17,7 +17,7 @@ struct CirclePrimitive: Object {
 		return [self.positionX, self.positionY, self.radius]
 	}
 
-	init(name: String, children: [String: Drawable], positionX: Property, positionY: Property, radius: Property) {
+	init(name: String, children: [String: Object], positionX: Property, positionY: Property, radius: Property) {
 		self.id = SharedIDMaker.makeID(withPrefix: "Circle")
 
 		self.name = name
