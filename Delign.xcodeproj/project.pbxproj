@@ -11,6 +11,8 @@
 		63191B831CCBAF3E00A0C1FA /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63191B821CCBAF3E00A0C1FA /* Utility.swift */; };
 		63191B851CCBAF8500A0C1FA /* CirclePrimitive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63191B841CCBAF8500A0C1FA /* CirclePrimitive.swift */; };
 		63191B871CCBAFA700A0C1FA /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63191B861CCBAFA700A0C1FA /* Group.swift */; };
+		63191B8A1CCBD26800A0C1FA /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63191B891CCBD26800A0C1FA /* Tools.swift */; };
+		63191B8D1CCBD7FD00A0C1FA /* CircleTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63191B8C1CCBD7FD00A0C1FA /* CircleTool.swift */; };
 		6372FB021CC9AD47009834B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6372FB011CC9AD47009834B4 /* AppDelegate.swift */; };
 		6372FB041CC9AD47009834B4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6372FB031CC9AD47009834B4 /* ViewController.swift */; };
 		6372FB071CC9AD47009834B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6372FB051CC9AD47009834B4 /* Main.storyboard */; };
@@ -29,6 +31,8 @@
 		63191B821CCBAF3E00A0C1FA /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		63191B841CCBAF8500A0C1FA /* CirclePrimitive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CirclePrimitive.swift; sourceTree = "<group>"; };
 		63191B861CCBAFA700A0C1FA /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		63191B891CCBD26800A0C1FA /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
+		63191B8C1CCBD7FD00A0C1FA /* CircleTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleTool.swift; sourceTree = "<group>"; };
 		6372FAFE1CC9AD47009834B4 /* Delign.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Delign.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6372FB011CC9AD47009834B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6372FB031CC9AD47009834B4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +65,14 @@
 			name = Objects;
 			sourceTree = "<group>";
 		};
+		63191B8B1CCBD7ED00A0C1FA /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				63191B8C1CCBD7FD00A0C1FA /* CircleTool.swift */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
 		6372FAF51CC9AD47009834B4 = {
 			isa = PBXGroup;
 			children = (
@@ -82,10 +94,12 @@
 		6372FB001CC9AD47009834B4 /* Delign */ = {
 			isa = PBXGroup;
 			children = (
+				63191B8B1CCBD7ED00A0C1FA /* Tools */,
 				63191B881CCBAFB000A0C1FA /* Objects */,
 				6372FB131CC9AD55009834B4 /* Models.swift */,
 				6372FB141CC9AD55009834B4 /* Streams.swift */,
 				63191B801CCBAF1E00A0C1FA /* Factories.swift */,
+				63191B891CCBD26800A0C1FA /* Tools.swift */,
 				63191B821CCBAF3E00A0C1FA /* Utility.swift */,
 				6372FB011CC9AD47009834B4 /* AppDelegate.swift */,
 				6372FB031CC9AD47009834B4 /* ViewController.swift */,
@@ -242,7 +256,9 @@
 				63191B831CCBAF3E00A0C1FA /* Utility.swift in Sources */,
 				63191B871CCBAFA700A0C1FA /* Group.swift in Sources */,
 				6372FB021CC9AD47009834B4 /* AppDelegate.swift in Sources */,
+				63191B8D1CCBD7FD00A0C1FA /* CircleTool.swift in Sources */,
 				63191B811CCBAF1E00A0C1FA /* Factories.swift in Sources */,
+				63191B8A1CCBD26800A0C1FA /* Tools.swift in Sources */,
 				63191B851CCBAF8500A0C1FA /* CirclePrimitive.swift in Sources */,
 				6372FB161CC9AD55009834B4 /* Streams.swift in Sources */,
 			);

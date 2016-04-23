@@ -1,6 +1,12 @@
 import UIKit
 import VectorKit
 
+/// Holds any state necessary for an application session.
+struct Workspace {
+	var artboard: Artboard
+	var activeTool: Tool
+}
+
 /// A spatial and lexical context for objects.
 protocol Artboard: Named {
 	var root: Object { get set }
@@ -59,7 +65,6 @@ protocol Transformable {
 //	/// The property to be affected.
 //	var target: Property { get set }
 //}
-
 
 /// A value which affects an object, which can be the target of a driver.
 protocol Property: Named {
