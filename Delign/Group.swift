@@ -5,12 +5,12 @@ struct Group: Object {
 	var id: String
 
 	var name: String
-	var children: [Drawable]
+	var children: [String: Drawable]
 
 	var positionX: Property
 	var positionY: Property
 
-	init(name: String, children: [Drawable], positionX: Property, positionY: Property) {
+	init(name: String, children: [String: Drawable], positionX: Property, positionY: Property) {
 		self.id = SharedIDMaker.makeID(withPrefix: "Group")
 
 		self.name = name

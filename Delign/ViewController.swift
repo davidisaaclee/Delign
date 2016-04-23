@@ -5,32 +5,14 @@ class ViewController: UIViewController {
 	var drawing: Drawing?
 
 	required init?(coder aDecoder: NSCoder) {
-		let positionX = Properties.make(name: "posX", value: 0)
-		let positionY = Properties.make(name: "posY", value: 0)
-		var rootGroup = Group(name: "root", children: [], positionX: positionX, positionY: positionY)
+		let rootGroup = Group(name: "root",
+		                      children: [:],
+		                      positionX: Properties.make(name: "posX", value: 0),
+		                      positionY: Properties.make(name: "posY", value: 0))
 
-		rootGroup.children = (0 ..< 4).map { groupIndex -> Drawable in
-			let children = (0 ..< 10).map { (index: Int) -> Drawable in
-				let positionX = Properties.make(name: "posX", value: CGFloat(index + groupIndex * 10) * 10)
-				let positionY = Properties.make(name: "posY", value: CGFloat(index + groupIndex * 10) * 10)
-				let radius = Properties.make(name: "radius", value: 100)
-
-				return CirclePrimitive(name: "circle", children: [], positionX: positionX, positionY: positionY, radius: radius)
-			}
-
-			let positionX = Properties.make(name: "posX", value: CGFloat(groupIndex * 10))
-			let positionY = Properties.make(name: "posY", value: CGFloat(groupIndex * 10))
-
-			let group = Group(name: "group-\(groupIndex)",
-				children: children,
-				positionX: positionX,
-				positionY: positionY)
-
-			rootGroup.children.append(group)
-			return group
-		}
-
-		self.workspace = Workspace(artboard: Artboards.make(name: "My Artboard", root: rootGroup), activeTool: CircleTool())
+		self.workspace = Workspace(artboard: Artboards.make(name: "My Artboard", root: rootGroup),
+		                           activeTool: CircleTool(),
+		                           history: History())
 
 		super.init(coder: aDecoder)
 	}
@@ -51,6 +33,8 @@ class ViewController: UIViewController {
 		self.workspace = self.workspace.activeTool.ended(atPoint: touches.first!.locationInView(self.view),
 		                                                 context: self.workspace)
 		self.updateDraw()
+
+		self.workspace.activeTool.commit().forEach { self.workspace.history.pushItem($0) }
 	}
 
 	override func viewDidLoad() {
@@ -60,6 +44,15 @@ class ViewController: UIViewController {
 		self.view.layer.addSublayer(self.drawing!.layer)
 	}
 
+	@IBAction func undo() {
+		self.workspace = self.workspace.history.undo(self.workspace)
+		self.updateDraw()
+	}
+
+	@IBAction func redo() {
+		self.workspace = self.workspace.history.redo(self.workspace)
+		self.updateDraw()
+	}
 
 	func updateDraw() {
 		let updatedDrawing = self.workspace.artboard.root.updateDrawing(self.drawing)
@@ -70,7 +63,4 @@ class ViewController: UIViewController {
 		}
 		self.drawing = updatedDrawing
 	}
-
-
 }
-

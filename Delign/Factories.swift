@@ -59,7 +59,34 @@ struct Artboards {
 	}
 
 	static func makeEmpty(name name: String) -> Artboard {
-		let root = Group(name: "Root", children: [], positionX: Properties.make(name: "posX", value: 0), positionY: Properties.make(name: "posY", value: 0))
+		let root = Group(name: "Root", children: [:], positionX: Properties.make(name: "posX", value: 0), positionY: Properties.make(name: "posY", value: 0))
 		return ArtboardImpl(name: name, root: root)
 	}
 }
+
+struct HistoryItems {
+	struct HistoryItemImpl: HistoryItem {
+		let undoBlock: Workspace -> Workspace
+		let redoBlock: Workspace -> Workspace
+
+		init(undoBlock: Workspace -> Workspace, redoBlock: Workspace -> Workspace) {
+			self.undoBlock = undoBlock
+			self.redoBlock = redoBlock
+		}
+
+		func undo(context: Workspace) -> Workspace {
+			return self.undoBlock(context)
+		}
+
+		func redo(context: Workspace) -> Workspace {
+			return self.redoBlock(context)
+		}
+	}
+
+	static func make(undoBlock undoBlock: Workspace -> Workspace, redoBlock: Workspace -> Workspace) -> HistoryItem {
+		return HistoryItemImpl(undoBlock: undoBlock, redoBlock: redoBlock)
+	}
+}
+
+
+

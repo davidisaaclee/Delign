@@ -5,6 +5,8 @@ import VectorKit
 struct Workspace {
 	var artboard: Artboard
 	var activeTool: Tool
+
+	var history: History
 }
 
 /// A spatial and lexical context for objects.
@@ -15,7 +17,7 @@ protocol Artboard: Named {
 
 /// A hierarchical object that can be drawn to a `CALayer`.
 protocol Drawable: Identifiable {
-	var children: [Drawable] { get }
+	var children: [String: Drawable] { get set }
 
 	func drawSelf() -> CALayer
 }
@@ -24,7 +26,7 @@ extension Drawable {
 	func updateDrawing(drawing: Drawing?) -> Drawing {
 		let updatedLayer = self.drawSelf()
 		let children: [String: Drawing] = self.children
-			.map { ($0.id, $0.updateDrawing(drawing?.children[$0.id])) }
+			.map { (id, child) in (id, child.updateDrawing(drawing?.children[id])) }
 			.reduce([:]) {
 				var d = $0
 				d[$1.0] = $1.1
@@ -71,7 +73,8 @@ protocol Property: Named {
 	var name: String { get }
 
 	/// The value of this property as a stream.
-	var stream: Stream { get }
+	// TODO: Not certain this should be settable.
+	var stream: Stream { get set }
 }
 
 extension Property {
