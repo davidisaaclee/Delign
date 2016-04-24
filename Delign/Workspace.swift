@@ -30,6 +30,7 @@ struct Workspace {
 		self.kit = Kit(tools: [
 			self.selectionTool,
 			NavigationTool(),
+			PathTool(),
 			CircleTool(),
 			TransformTool()
 		])
