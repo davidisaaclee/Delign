@@ -10,11 +10,11 @@ struct Workspace {
 	var viewportTransform: CGAffineTransform
 
 	func viewportPointFromDocumentPoint(point: CGPoint) -> CGPoint {
-		let inverse = CGAffineTransformInvert(self.viewportTransform)
-		return CGPointApplyAffineTransform(point, inverse)
+		return CGPointApplyAffineTransform(point, self.viewportTransform)
 	}
 
 	func documentPointFromViewportPoint(point: CGPoint) -> CGPoint {
-		return CGPointApplyAffineTransform(point, self.viewportTransform)
+		let inverse = CGAffineTransformInvert(self.viewportTransform)
+		return CGPointApplyAffineTransform(point, inverse)
 	}
 }
