@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 import VectorKit
 
-class CirclePrimitive: Object {
+class CirclePrimitive: Object, Stylable {
 	var id: String
 
 	var name: String
@@ -17,6 +17,8 @@ class CirclePrimitive: Object {
 	var properties: [Property] {
 		return [self.positionX, self.positionY, self.radius]
 	}
+
+	var styles: [Style] = [OutlineStyle(width: 5, color: UIColor.greenColor().CGColor)]
 
 	init(name: String, children: [String: Object], positionX: Property, positionY: Property, radius: Property) {
 		self.id = IDMaker.sharedIDMaker.makeID(withPrefix: "Circle")
@@ -38,9 +40,9 @@ class CirclePrimitive: Object {
 		let layer = CAShapeLayer()
 		layer.path = path.CGPath
 
-		layer.strokeColor = UIColor.blueColor().CGColor
+		layer.strokeColor = nil
 		layer.fillColor = nil
 
-		return layer
+		return self.applyStyles(toLayer: layer)
 	}
 }

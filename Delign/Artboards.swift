@@ -6,11 +6,7 @@ struct Artboards {
 		var name: String
 		var root: Object
 
-		private var allObjects: [String: Object] = [:] {
-			didSet {
-				print(allObjects)
-			}
-		}
+		private var allObjects: [String: Object] = [:]
 
 		init(name: String, root: Object) {
 			self.name = name
