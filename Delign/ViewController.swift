@@ -18,10 +18,7 @@ class ViewController: UIViewController {
 
 	required init?(coder aDecoder: NSCoder) {
 		self.workspace = Workspace(artboard: Artboards.makeEmpty(name: "My Artboard"),
-		                           activeTool: CircleTool(),
-		                           history: History(),
-		                           viewportTransform: CGAffineTransformIdentity,
-		                           viewportColor: UIColor.whiteColor().CGColor)
+		                           activeTool: CircleTool())
 
 		super.init(coder: aDecoder)
 	}
