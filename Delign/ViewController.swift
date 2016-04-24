@@ -19,7 +19,8 @@ class ViewController: UIViewController {
 		self.workspace = Workspace(artboard: Artboards.makeEmpty(name: "My Artboard"),
 		                           activeTool: CircleTool(),
 		                           history: History(),
-		                           viewportTransform: CGAffineTransformIdentity)
+		                           viewportTransform: CGAffineTransformIdentity,
+		                           viewportColor: UIColor.blackColor().CGColor)
 
 		super.init(coder: aDecoder)
 	}
@@ -29,6 +30,7 @@ class ViewController: UIViewController {
 
 		self.drawing = self.workspace.artboard.root.updateDrawing(self.drawing)
 		self.view.layer.addSublayer(self.drawing!.layer)
+		self.view.layer.backgroundColor = self.workspace.viewportColor
 	}
 
 	
@@ -87,6 +89,7 @@ class ViewController: UIViewController {
 		} else {
 			self.view.layer.addSublayer(updatedDrawing.layer)
 		}
+		self.view.layer.backgroundColor = self.workspace.viewportColor
 		self.drawing = updatedDrawing
 	}
 }

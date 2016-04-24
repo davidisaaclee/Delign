@@ -3,12 +3,16 @@ import UIKit
 
 struct Artboards {
 	class ArtboardImpl: Artboard {
+		var id: String
+
 		var name: String
 		var root: Object
 
 		private var allObjects: [String: Object] = [:]
 
 		init(name: String, root: Object) {
+			self.id = IDMaker.sharedIDMaker.makeID(withPrefix: "Artboard")
+
 			self.name = name
 			self.root = root
 
@@ -47,7 +51,10 @@ struct Artboards {
 	}
 
 	static func makeEmpty(name name: String) -> Artboard {
-		let root = Group(name: "Root", children: [:], positionX: Properties.make(name: "posX", value: 0), positionY: Properties.make(name: "posY", value: 0))
+		let root = BackgroundObject(name: "Background",
+		                            children: [:],
+		                            positionX: Properties.make(name: "posX", value: 0),
+		                            positionY: Properties.make(name: "posY", value: 0))
 		return ArtboardImpl(name: name, root: root)
 	}
 }

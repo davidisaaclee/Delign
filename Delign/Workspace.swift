@@ -8,6 +8,7 @@ struct Workspace {
 	var history: History
 
 	var viewportTransform: CGAffineTransform
+	var viewportColor: CGColor
 
 	func viewportPointFromDocumentPoint(point: CGPoint) -> CGPoint {
 		return CGPointApplyAffineTransform(point, self.viewportTransform)

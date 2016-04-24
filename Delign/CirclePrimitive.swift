@@ -18,13 +18,16 @@ class CirclePrimitive: Object, Stylable {
 		return [self.positionX, self.positionY, self.radius]
 	}
 
-	var styles: [Style] = [OutlineStyle(width: 5, color: UIColor.greenColor().CGColor)]
+	var styles: [Style] = [
+		OutlineStyle(width: 5, color: UIColor.greenColor().CGColor),
+	]
 
 	init(name: String, children: [String: Object], positionX: Property, positionY: Property, radius: Property) {
 		self.id = IDMaker.sharedIDMaker.makeID(withPrefix: "Circle")
 
 		self.name = name
 		self.children = children
+		
 		self.positionX = positionX
 		self.positionY = positionY
 		self.radius = radius
