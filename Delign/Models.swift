@@ -1,13 +1,6 @@
 import UIKit
 import VectorKit
 
-/// Holds any state necessary for an application session.
-struct Workspace {
-	var artboard: Artboard
-	var activeTool: Tool
-	var history: History
-}
-
 /// A spatial and lexical context for objects.
 protocol Artboard: class, Named {
 	var root: Object { get set }
