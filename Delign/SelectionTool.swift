@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class SelectionTool: Tool {
+final class SelectionTool: Tool {
 	static let name: String = "Select"
 
 	let tapThreshold: NSTimeInterval = 0.1
@@ -20,12 +20,8 @@ class SelectionTool: Tool {
 			.filter { CGRectIntersectsRect($0.boundingBox, marquee) }
 	}
 
-	private var selectedObjects: [Object] = [] {
-		didSet {
-			print(selectedObjects)
-		}
-	}
-
+	var selectedObjects: [Object] = []
+	
 	required init() {}
 
 	func began(atPoint point: CGPoint, context: Workspace) -> Workspace {

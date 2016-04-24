@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class CircleTool: Tool {
+final class CircleTool: Tool {
 	static let name: String = "Circle"
 
 	private var startPoint: CGPoint?

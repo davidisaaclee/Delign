@@ -31,6 +31,7 @@ struct Workspace {
 			self.selectionTool,
 			NavigationTool(),
 			CircleTool(),
+			TransformTool()
 		])
 	}
 

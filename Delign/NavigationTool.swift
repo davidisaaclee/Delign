@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 import VectorKit
 
-class NavigationTool: Tool {
+final class NavigationTool: Tool {
 	static let name: String = "Navigate"
 
 	private var initialTransform: CGAffineTransform?
