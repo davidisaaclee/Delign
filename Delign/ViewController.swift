@@ -18,7 +18,8 @@ class ViewController: UIViewController {
 	required init?(coder aDecoder: NSCoder) {
 		self.workspace = Workspace(artboard: Artboards.makeEmpty(name: "My Artboard"),
 		                           activeTool: CircleTool(),
-		                           history: History())
+		                           history: History(),
+		                           viewportTransform: CGAffineTransformIdentity)
 
 		super.init(coder: aDecoder)
 	}
@@ -34,19 +35,28 @@ class ViewController: UIViewController {
 	// MARK: - Interaction
 
 	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-		self.workspace = self.workspace.activeTool.began(atPoint: touches.first!.locationInView(self.view),
+		let locationInView = touches.first!.locationInView(self.view)
+		let locationInDocument = self.workspace.documentPointFromViewportPoint(locationInView)
+		
+		self.workspace = self.workspace.activeTool.began(atPoint: locationInDocument,
 		                                                 context: self.workspace)
 		self.updateDraw()
 	}
 
 	override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-		self.workspace = self.workspace.activeTool.moved(toPoint: touches.first!.locationInView(self.view),
+		let locationInView = touches.first!.locationInView(self.view)
+		let locationInDocument = self.workspace.documentPointFromViewportPoint(locationInView)
+
+		self.workspace = self.workspace.activeTool.moved(toPoint: locationInDocument,
 		                                                 context: self.workspace)
 		self.updateDraw()
 	}
 
 	override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-		self.workspace = self.workspace.activeTool.ended(atPoint: touches.first!.locationInView(self.view),
+		let locationInView = touches.first!.locationInView(self.view)
+		let locationInDocument = self.workspace.documentPointFromViewportPoint(locationInView)
+
+		self.workspace = self.workspace.activeTool.ended(atPoint: locationInDocument,
 		                                                 context: self.workspace)
 		self.updateDraw()
 
@@ -71,6 +81,7 @@ class ViewController: UIViewController {
 
 	func updateDraw() {
 		let updatedDrawing = self.workspace.artboard.root.updateDrawing(self.drawing)
+		updatedDrawing.layer.transform = CATransform3DMakeAffineTransform(self.workspace.viewportTransform)
 		if let previousLayer = self.drawing?.layer {
 			self.view.layer.replaceSublayer(previousLayer, with: updatedDrawing.layer)
 		} else {

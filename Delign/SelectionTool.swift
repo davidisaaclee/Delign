@@ -7,21 +7,15 @@ class SelectionTool: Tool {
 	required init() {}
 
 	func began(atPoint point: CGPoint, context: Workspace) -> Workspace {
-		var contextʹ = context
-
-		return contextʹ
+		return context
 	}
 
 	func moved(toPoint point: CGPoint, context: Workspace) -> Workspace {
-		var contextʹ = context
-
-		return contextʹ
+		return context
 	}
 
 	func ended(atPoint point: CGPoint, context: Workspace) -> Workspace {
-		var contextʹ = context
-
-		return contextʹ
+		return context
 	}
 
 	func commit() -> [HistoryItem] {
