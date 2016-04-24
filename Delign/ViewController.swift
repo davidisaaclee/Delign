@@ -5,6 +5,8 @@ class ViewController: UIViewController {
 	var drawing: Drawing?
 	var overlay: CALayer?
 
+	lazy var canvas: CALayer = self.view.layer
+
 	@IBOutlet weak var toolsetView: UICollectionView! {
 		didSet {
 			self.toolsetView.dataSource = self
@@ -28,8 +30,8 @@ class ViewController: UIViewController {
 		super.viewDidLoad()
 
 		self.drawing = self.workspace.artboard.root.updateDrawing(self.drawing)
-		self.view.layer.addSublayer(self.drawing!.layer)
-		self.view.layer.backgroundColor = self.workspace.viewportColor
+		self.canvas.addSublayer(self.drawing!.layer)
+		self.canvas.backgroundColor = self.workspace.viewportColor
 	}
 
 	
@@ -82,15 +84,16 @@ class ViewController: UIViewController {
 
 	func updateDraw() {
 		let updatedDrawing = self.workspace.artboard.root.updateDrawing(self.drawing)
-		updatedDrawing.layer.transform = CATransform3DMakeAffineTransform(self.workspace.viewportTransform)
-		self.addLayer(updatedDrawing.layer, toParent: self.view.layer, replacing: self.drawing?.layer)
+		self.addLayer(updatedDrawing.layer, toParent: self.canvas, replacing: self.drawing?.layer)
 		self.drawing = updatedDrawing
 
 		let updatedOverlay = self.workspace.updateOverlay(self.overlay)
-		self.addLayer(updatedOverlay, toParent: self.view.layer, replacing: self.overlay)
+		self.addLayer(updatedOverlay, toParent: self.canvas, replacing: self.overlay)
 		self.overlay = updatedOverlay
 
-		self.view.layer.backgroundColor = self.workspace.viewportColor
+		updatedDrawing.layer.transform = CATransform3DMakeAffineTransform(self.workspace.viewportTransform)
+		updatedOverlay.transform = CATransform3DMakeAffineTransform(self.workspace.viewportTransform)
+		self.canvas.backgroundColor = self.workspace.viewportColor
 	}
 
 
@@ -107,7 +110,7 @@ class ViewController: UIViewController {
 
 extension ViewController: UICollectionViewDelegate {
 	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-		self.workspace.activeTool = Kit.tools[indexPath.item].init()
+		self.workspace.activeTool = self.workspace.kit.tools[indexPath.item]
 	}
 }
 
@@ -117,14 +120,14 @@ extension ViewController: UICollectionViewDataSource {
 	}
 
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return Kit.tools.count
+		return self.workspace.kit.tools.count
 	}
 
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ToolCell", forIndexPath: indexPath)
 		guard let toolCell = cell as? ToolCell else { return cell }
 
-		toolCell.label.text = Kit.tools[indexPath.item].name
+		toolCell.label.text = self.workspace.kit.tools[indexPath.item].dynamicType.name
 
 		return toolCell
 	}
