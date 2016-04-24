@@ -21,7 +21,8 @@ class CircleTool: Tool {
 		self.startPoint = point
 
 		var contextʹ = context
-		contextʹ.artboard.root.children[newCircle.id] = newCircle
+//		contextʹ.artboard.root.children[newCircle.id] = newCircle
+		contextʹ.artboard.addObject(newCircle, parent: nil)
 		return contextʹ
 	}
 
@@ -45,11 +46,12 @@ class CircleTool: Tool {
 		let items: [HistoryItem] = self.changes.map { addedObject in
 			HistoryItems.make(undoBlock: { workspace in
 				var workspaceʹ = workspace
-				workspaceʹ.artboard.root.children.removeValueForKey(addedObject.id)
+				workspaceʹ.artboard.removeObject(addedObject)
 				return workspaceʹ
 			}, redoBlock: { workspace in
 				var workspaceʹ = workspace
-				workspaceʹ.artboard.root.children[addedObject.id] = addedObject
+//				workspaceʹ.artboard.root.children[addedObject.id] = addedObject
+				workspaceʹ.artboard.addObject(addedObject, parent: nil)
 				return workspaceʹ
 			})
 		}

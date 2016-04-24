@@ -9,8 +9,14 @@ struct Workspace {
 }
 
 /// A spatial and lexical context for objects.
-protocol Artboard: Named {
+protocol Artboard: class, Named {
 	var root: Object { get set }
+
+	func find(id: String) -> Object?
+	func contains(object: Object) -> Bool
+
+	func addObject(object: Object, parent: Object?)
+	func removeObject(object: Object)
 }
 
 
@@ -46,11 +52,18 @@ protocol Drawing {
 }
 
 
-
 /// A spatial object to be positioned on an artboard.
-protocol Object: Named, Identifiable, Transformable, Drawable {
+protocol Object: class, Named, Identifiable, Transformable, Drawable {
+	weak var parent: Object? { get set }
 	var children: [String: Object] { get set }
 }
+
+extension Object {
+	func removeChild(child: Object) {
+		self.children.removeValueForKey(child.id)
+	}
+}
+
 
 /// Describes something which can be translated.
 protocol Transformable {

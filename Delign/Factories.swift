@@ -1,15 +1,8 @@
-//
-//  Factories.swift
-//  Delign
-//
-//  Created by David Lee on 4/23/16.
-//  Copyright © 2016 David Lee. All rights reserved.
-//
-
 import Foundation
 import UIKit
 
 class IDMaker {
+	static let sharedIDMaker = IDMaker()
 	private var prefixCounts: [String: Int] = [:]
 
 	func makeID(withPrefix prefix: String) -> String {
@@ -21,8 +14,6 @@ class IDMaker {
 		return "\(prefix) \(self.prefixCounts[prefix]!)"
 	}
 }
-
-let SharedIDMaker = IDMaker()
 
 
 struct Drawings {
@@ -49,13 +40,52 @@ struct Properties {
 }
 
 struct Artboards {
-	struct ArtboardImpl: Artboard {
+	class ArtboardImpl: Artboard {
 		var name: String
 		var root: Object
-	}
 
-	static func make(name name: String, root: Object) -> Artboard {
-		return ArtboardImpl(name: name, root: root)
+		private var allObjects: [String: Object] = [:] {
+			didSet {
+				print(allObjects)
+			}
+		}
+
+		init(name: String, root: Object) {
+			self.name = name
+			self.root = root
+
+			func addToDict(object: Object) {
+				self.allObjects[object.id] = object
+				object.children.values.forEach(addToDict)
+			}
+
+			addToDict(root)
+		}
+
+		func addObject(object: Object, parent: Object?) {
+			let parent = parent ?? self.root
+
+			guard self.contains(parent) else {
+				fatalError("Attempted to add object to parent object which is not in this artboard.")
+			}
+
+			parent.children[object.id] = object
+			self.allObjects[object.id] = object
+			object.parent = parent
+		}
+
+		func removeObject(object: Object) {
+			self.allObjects.removeValueForKey(object.id)
+			object.parent?.removeChild(object)
+		}
+
+		func find(id: String) -> Object? {
+			return self.allObjects[id]
+		}
+
+		func contains(object: Object) -> Bool {
+			return self.find(object.id) != nil
+		}
 	}
 
 	static func makeEmpty(name name: String) -> Artboard {

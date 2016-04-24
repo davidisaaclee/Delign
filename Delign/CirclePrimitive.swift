@@ -2,11 +2,12 @@ import Foundation
 import UIKit
 import VectorKit
 
-struct CirclePrimitive: Object {
+class CirclePrimitive: Object {
 	var id: String
 
 	var name: String
 	var children: [String: Object]
+	weak var parent: Object?
 
 	var positionX: Property
 	var positionY: Property
@@ -18,7 +19,7 @@ struct CirclePrimitive: Object {
 	}
 
 	init(name: String, children: [String: Object], positionX: Property, positionY: Property, radius: Property) {
-		self.id = SharedIDMaker.makeID(withPrefix: "Circle")
+		self.id = IDMaker.sharedIDMaker.makeID(withPrefix: "Circle")
 
 		self.name = name
 		self.children = children

@@ -16,12 +16,7 @@ class ViewController: UIViewController {
 
 
 	required init?(coder aDecoder: NSCoder) {
-		let rootGroup = Group(name: "root",
-		                      children: [:],
-		                      positionX: Properties.make(name: "posX", value: 0),
-		                      positionY: Properties.make(name: "posY", value: 0))
-
-		self.workspace = Workspace(artboard: Artboards.make(name: "My Artboard", root: rootGroup),
+		self.workspace = Workspace(artboard: Artboards.makeEmpty(name: "My Artboard"),
 		                           activeTool: CircleTool(),
 		                           history: History())
 
