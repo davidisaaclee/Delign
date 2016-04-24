@@ -8,7 +8,7 @@ struct Artboards {
 		var name: String
 		var root: Object
 
-		private var allObjects: [String: Object] = [:]
+		var allObjects: [String: Object] = [:]
 
 		init(name: String, root: Object) {
 			self.id = IDMaker.sharedIDMaker.makeID(withPrefix: "Artboard")

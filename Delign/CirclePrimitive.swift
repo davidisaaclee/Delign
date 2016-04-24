@@ -9,6 +9,8 @@ class CirclePrimitive: Object, Stylable {
 	var children: [String: Object]
 	weak var parent: Object?
 
+	var locked: Bool = false
+
 	var positionX: Property
 	var positionY: Property
 
@@ -21,6 +23,14 @@ class CirclePrimitive: Object, Stylable {
 	var styles: [Style] = [
 		OutlineStyle(width: 5, color: UIColor.greenColor().CGColor),
 	]
+
+	var boundingBox: CGRect {
+		let center = CGPoint(x: self.positionX.stream.value, y: self.positionY.stream.value)
+		let size = CGSize(width: self.radius.value * 2, height: self.radius.value * 2)
+		let origin: CGPoint = center - size * 0.5
+
+		return CGRect(origin: origin, size: size)
+	}
 
 	init(name: String, children: [String: Object], positionX: Property, positionY: Property, radius: Property) {
 		self.id = IDMaker.sharedIDMaker.makeID(withPrefix: "Circle")

@@ -3,8 +3,7 @@ import UIKit
 class ViewController: UIViewController {
 	var workspace: Workspace
 	var drawing: Drawing?
-
-	private var toolCellForSizing: ToolCell = ToolCell()
+	var overlay: CALayer?
 
 	@IBOutlet weak var toolsetView: UICollectionView! {
 		didSet {
@@ -20,7 +19,7 @@ class ViewController: UIViewController {
 		                           activeTool: CircleTool(),
 		                           history: History(),
 		                           viewportTransform: CGAffineTransformIdentity,
-		                           viewportColor: UIColor.blackColor().CGColor)
+		                           viewportColor: UIColor.whiteColor().CGColor)
 
 		super.init(coder: aDecoder)
 	}
@@ -84,13 +83,25 @@ class ViewController: UIViewController {
 	func updateDraw() {
 		let updatedDrawing = self.workspace.artboard.root.updateDrawing(self.drawing)
 		updatedDrawing.layer.transform = CATransform3DMakeAffineTransform(self.workspace.viewportTransform)
-		if let previousLayer = self.drawing?.layer {
-			self.view.layer.replaceSublayer(previousLayer, with: updatedDrawing.layer)
-		} else {
-			self.view.layer.addSublayer(updatedDrawing.layer)
-		}
-		self.view.layer.backgroundColor = self.workspace.viewportColor
+		self.addLayer(updatedDrawing.layer, toParent: self.view.layer, replacing: self.drawing?.layer)
 		self.drawing = updatedDrawing
+
+		let updatedOverlay = self.workspace.updateOverlay(self.overlay)
+		self.addLayer(updatedOverlay, toParent: self.view.layer, replacing: self.overlay)
+		self.overlay = updatedOverlay
+
+		self.view.layer.backgroundColor = self.workspace.viewportColor
+	}
+
+
+	// MARK: - Helpers
+
+	func addLayer(layer: CALayer, toParent parent: CALayer, replacing previousLayer: CALayer?) {
+		if let previousLayer = previousLayer {
+			parent.replaceSublayer(previousLayer, with: layer)
+		} else {
+			parent.addSublayer(layer)
+		}
 	}
 }
 

@@ -18,4 +18,10 @@ struct Workspace {
 		let inverse = CGAffineTransformInvert(self.viewportTransform)
 		return CGPointApplyAffineTransform(point, inverse)
 	}
+
+
+	// TODO: Not certain this should be here.
+	func updateOverlay(overlay: CALayer?) -> CALayer {
+		return self.activeTool.drawOverlay(self)
+	}
 }

@@ -11,7 +11,7 @@
 		63191B831CCBAF3E00A0C1FA /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63191B821CCBAF3E00A0C1FA /* Utility.swift */; };
 		63191B851CCBAF8500A0C1FA /* CirclePrimitive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63191B841CCBAF8500A0C1FA /* CirclePrimitive.swift */; };
 		63191B871CCBAFA700A0C1FA /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63191B861CCBAFA700A0C1FA /* Group.swift */; };
-		63191B8A1CCBD26800A0C1FA /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63191B891CCBD26800A0C1FA /* Tools.swift */; };
+		63191B8A1CCBD26800A0C1FA /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63191B891CCBD26800A0C1FA /* Tool.swift */; };
 		63191B8D1CCBD7FD00A0C1FA /* CircleTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63191B8C1CCBD7FD00A0C1FA /* CircleTool.swift */; };
 		63191B911CCC100400A0C1FA /* SelectionTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63191B901CCC100400A0C1FA /* SelectionTool.swift */; };
 		63191B931CCC145D00A0C1FA /* Kit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63191B921CCC145D00A0C1FA /* Kit.swift */; };
@@ -45,7 +45,7 @@
 		63191B821CCBAF3E00A0C1FA /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		63191B841CCBAF8500A0C1FA /* CirclePrimitive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CirclePrimitive.swift; sourceTree = "<group>"; };
 		63191B861CCBAFA700A0C1FA /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
-		63191B891CCBD26800A0C1FA /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
+		63191B891CCBD26800A0C1FA /* Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
 		63191B8C1CCBD7FD00A0C1FA /* CircleTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleTool.swift; sourceTree = "<group>"; };
 		63191B901CCC100400A0C1FA /* SelectionTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionTool.swift; sourceTree = "<group>"; };
 		63191B921CCC145D00A0C1FA /* Kit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Kit.swift; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 		63191B8B1CCBD7ED00A0C1FA /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				63191B891CCBD26800A0C1FA /* Tools.swift */,
+				63191B891CCBD26800A0C1FA /* Tool.swift */,
 				63191B8C1CCBD7FD00A0C1FA /* CircleTool.swift */,
 				63191B901CCC100400A0C1FA /* SelectionTool.swift */,
 				63191BA61CCC499000A0C1FA /* NavigationTool.swift */,
@@ -348,7 +348,7 @@
 				63191B8D1CCBD7FD00A0C1FA /* CircleTool.swift in Sources */,
 				63191B811CCBAF1E00A0C1FA /* IDMaker.swift in Sources */,
 				63191BAE1CCC53E500A0C1FA /* FillStyle.swift in Sources */,
-				63191B8A1CCBD26800A0C1FA /* Tools.swift in Sources */,
+				63191B8A1CCBD26800A0C1FA /* Tool.swift in Sources */,
 				63191BB21CCC73AE00A0C1FA /* BackgroundObject.swift in Sources */,
 				63191B9E1CCC478D00A0C1FA /* Properties.swift in Sources */,
 				63191B931CCC145D00A0C1FA /* Kit.swift in Sources */,
@@ -472,10 +472,13 @@
 			baseConfigurationReference = 5B146B484C23AA00FB260F33 /* Pods-Delign.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Delign/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dil.Delign;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -484,10 +487,13 @@
 			baseConfigurationReference = 038864F5FF78D2A9D9D6C197 /* Pods-Delign.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Delign/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dil.Delign;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

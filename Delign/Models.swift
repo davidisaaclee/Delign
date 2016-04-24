@@ -4,6 +4,7 @@ import VectorKit
 /// A spatial and lexical context for objects.
 protocol Artboard: class, Named {
 	var root: Object { get set }
+	var allObjects: [String: Object] { get }
 
 	func find(id: String) -> Object?
 	func contains(object: Object) -> Bool
@@ -16,6 +17,8 @@ protocol Artboard: class, Named {
 /// A hierarchical object that can be drawn to a `CALayer`.
 protocol Drawable: Identifiable {
 	func drawSelf() -> CALayer
+
+	var boundingBox: CGRect { get }
 }
 
 extension Drawable where Self: Object {
@@ -48,6 +51,8 @@ protocol Drawing {
 protocol Object: class, Named, Identifiable, Transformable, Drawable {
 	weak var parent: Object? { get set }
 	var children: [String: Object] { get set }
+	
+	var locked: Bool { get set }
 }
 
 extension Object {
