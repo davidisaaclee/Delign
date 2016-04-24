@@ -5,13 +5,15 @@ import VectorKit
 class NavigationTool: Tool {
 	static let name: String = "Navigate"
 
+	private var initialTransform: CGAffineTransform?
 	private var previousPoint: CGPoint?
+	private var transforms: [(pre: CGAffineTransform, post: CGAffineTransform)] = []
 
 	required init() {}
 
 	func began(atPoint point: CGPoint, context: Workspace) -> Workspace {
-		let point = context.viewportPointFromDocumentPoint(point)
-		self.previousPoint = point
+		self.previousPoint = context.viewportPointFromDocumentPoint(point)
+		self.initialTransform = context.viewportTransform
 		return context
 	}
 
@@ -29,11 +31,27 @@ class NavigationTool: Tool {
 	}
 
 	func ended(atPoint point: CGPoint, context: Workspace) -> Workspace {
+		guard let initialTransform = self.initialTransform else { return context }
+		self.transforms.append(pre: initialTransform, post: context.viewportTransform)
+
 		self.previousPoint = nil
+
 		return context
 	}
 
 	func commit() -> [HistoryItem] {
-		return []
+		let items = self.transforms.map { (pre, post) in
+			HistoryItems.make(undoBlock: { workspace in
+				var workspaceʹ = workspace
+				workspaceʹ.viewportTransform = pre
+				return workspaceʹ
+			}, redoBlock: { workspace in
+				var workspaceʹ = workspace
+				workspaceʹ.viewportTransform = post
+				return workspaceʹ
+			})
+		}
+		self.transforms = []
+		return items
 	}
 }
