@@ -63,27 +63,3 @@ protocol Transformable {
 	var positionX: Property { get set }
 	var positionY: Property { get set }
 }
-
-///// A declaration of how a property should react to an input stream.
-//protocol Driver {
-//	/// The input signal to which this driver reacts.
-//	var input: Stream { get set }
-//	
-//	/// The property to be affected.
-//	var target: Property { get set }
-//}
-
-/// A value which affects an object, which can be the target of a driver.
-protocol Property: Named {
-	var name: String { get }
-
-	/// The value of this property as a stream.
-	// TODO: Not certain this should be settable.
-	var stream: Stream { get set }
-}
-
-extension Property {
-	var value: CGFloat {
-		return self.stream.value
-	}
-}
