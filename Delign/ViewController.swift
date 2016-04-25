@@ -11,7 +11,9 @@ class ViewController: UIViewController {
 		didSet {
 			self.toolsetView.dataSource = self
 			self.toolsetView.delegate = self
-			(self.toolsetView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize = CGSize(width: 80, height: 40)
+			if let layout = self.toolsetView.collectionViewLayout as? UICollectionViewFlowLayout {
+				layout.itemSize = CGSize(width: 80, height: 40)
+			}
 		}
 	}
 
