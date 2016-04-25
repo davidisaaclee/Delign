@@ -76,6 +76,35 @@ class ViewController: UIViewController {
 		self.updateDraw()
 	}
 
+	private var poppedTool: Tool?
+
+	@IBAction func enableTranslateTool() {
+		self.poppedTool = self.workspace.activeTool
+		self.workspace.activeTool = TransformTool()
+	}
+
+	@IBAction func enableSelectTool() {
+		self.poppedTool = self.workspace.activeTool
+		self.workspace.activeTool = self.workspace.selectionTool
+	}
+
+	@IBAction func enableNavigateTool() {
+		self.poppedTool = self.workspace.activeTool
+		self.workspace.activeTool = NavigationTool()
+	}
+
+	@IBAction func disableTranslateTool() {
+		self.workspace.activeTool = self.poppedTool!
+	}
+
+	@IBAction func disableSelectTool() {
+		self.workspace.activeTool = self.poppedTool!
+	}
+
+	@IBAction func disableNavigateTool() {
+		self.workspace.activeTool = self.poppedTool!
+	}
+
 
 	// MARK: - Update
 

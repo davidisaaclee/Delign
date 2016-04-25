@@ -28,11 +28,11 @@ struct Workspace {
 		self.selectionTool = SelectionTool()
 
 		self.kit = Kit(tools: [
-			self.selectionTool,
-			NavigationTool(),
+//			self.selectionTool,
+//			NavigationTool(),
+//			TransformTool()
 			PathTool(),
 			CircleTool(),
-			TransformTool()
 		])
 	}
 

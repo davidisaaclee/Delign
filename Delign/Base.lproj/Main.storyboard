@@ -18,13 +18,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="9HL-fp-WZK">
-                                <rect key="frame" x="40" y="530" width="94" height="30"/>
+                                <rect key="frame" x="486" y="40" width="94" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAP-W8-PKN">
                                         <rect key="frame" x="0.0" y="0.0" width="38" height="30"/>
                                         <state key="normal" title="Undo"/>
                                         <connections>
-                                            <action selector="undo" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="lkk-b2-AJ9"/>
+                                            <action selector="undo" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="PPa-Yy-Y3r"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRS-jP-bQA">
@@ -58,7 +58,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2B-oe-lU7">
-                                                    <rect key="frame" x="24" y="14.5" width="42" height="21"/>
+                                                    <rect key="frame" x="24" y="14" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -77,14 +77,70 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="cih-W8-X7R">
+                                <rect key="frame" x="20" y="380" width="71" height="200"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Nw-tq-4Yz">
+                                        <rect key="frame" x="0.0" y="0.0" width="71" height="50"/>
+                                        <color key="backgroundColor" red="0.86745551509999996" green="1" blue="0.87582623559999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="j4k-0H-F8j"/>
+                                        </constraints>
+                                        <state key="normal" title="Select"/>
+                                        <connections>
+                                            <action selector="disableSelectTool" destination="BYZ-38-t0r" eventType="touchUpOutside" id="HUv-Gb-IyT"/>
+                                            <action selector="disableSelectTool" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ifk-Mb-DO1"/>
+                                            <action selector="enableSelectTool" destination="BYZ-38-t0r" eventType="touchDown" id="svu-EL-LUq"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FsN-8l-ysk">
+                                        <rect key="frame" x="0.0" y="75" width="71" height="50"/>
+                                        <color key="backgroundColor" red="0.86745551512194685" green="1" blue="0.87582623556231554" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="c88-fK-juD"/>
+                                        </constraints>
+                                        <state key="normal" title="Transform"/>
+                                        <connections>
+                                            <action selector="disableTranslateTool" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wi0-b2-yaK"/>
+                                            <action selector="disableTranslateTool" destination="BYZ-38-t0r" eventType="touchUpOutside" id="zOF-ud-1Js"/>
+                                            <action selector="enableTranslateTool" destination="BYZ-38-t0r" eventType="touchDown" id="H2w-iq-j95"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bUi-xF-0yf">
+                                        <rect key="frame" x="0.0" y="150" width="71" height="50"/>
+                                        <color key="backgroundColor" red="0.86745551509999996" green="1" blue="0.87582623559999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="W2n-CU-2DE"/>
+                                        </constraints>
+                                        <state key="normal" title="Navigate"/>
+                                        <connections>
+                                            <action selector="disableNavigateTool" destination="BYZ-38-t0r" eventType="touchUpOutside" id="ZMH-Bm-xAL"/>
+                                            <action selector="disableNavigateTool" destination="BYZ-38-t0r" eventType="touchUpInside" id="iHe-lt-cbf"/>
+                                            <action selector="enableNavigateTool" destination="BYZ-38-t0r" eventType="touchDown" id="spa-jA-3ma"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="cih-W8-X7R" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="3rs-NO-GM1"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9HL-fp-WZK" secondAttribute="bottom" constant="40" id="BhE-EJ-WTK"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="cih-W8-X7R" secondAttribute="bottom" constant="20" id="I3o-ct-EGj"/>
                             <constraint firstAttribute="trailing" secondItem="gGD-3R-alA" secondAttribute="trailing" constant="20" id="RGF-EE-8De"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gGD-3R-alA" secondAttribute="bottom" constant="20" id="Vka-6i-ugN"/>
+                            <constraint firstItem="gGD-3R-alA" firstAttribute="leading" secondItem="9HL-fp-WZK" secondAttribute="trailing" constant="20" id="b1c-B6-OaB"/>
+                            <constraint firstAttribute="trailing" secondItem="9HL-fp-WZK" secondAttribute="trailing" constant="20" id="rK2-SC-Xeb"/>
                             <constraint firstItem="9HL-fp-WZK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="40" id="ubB-pq-A0b"/>
+                            <constraint firstItem="9HL-fp-WZK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="vRP-gn-Uzk"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ubB-pq-A0b"/>
+                                <exclude reference="b1c-B6-OaB"/>
+                                <exclude reference="BhE-EJ-WTK"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="toolsetView" destination="gGD-3R-alA" id="tAa-tm-tpq"/>
