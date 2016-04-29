@@ -52,6 +52,7 @@
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="label" destination="0Zr-CD-iYF" id="XMm-mX-3iJ"/>
+                                                    <outlet property="labelLeadingConstraint" destination="7bF-1t-I5G" id="SFC-PN-1OI"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>

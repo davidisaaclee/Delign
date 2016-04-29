@@ -173,6 +173,13 @@ extension ViewController: UICollectionViewDataSource {
 }
 
 extension ViewController: UITableViewDataSource {
+	private func flattenObjectTree(object: Object, depth: Int = 0, accumulator: [(depth: Int, object: Object)] = []) -> [(depth: Int, object: Object)] {
+		var accumulatorCopy = accumulator
+		accumulatorCopy.append(depth: depth, object: object)
+
+		return object.children.values.reduce(accumulatorCopy) { self.flattenObjectTree($1, depth: depth + 1, accumulator: $0) }
+	}
+
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 		return 1
 	}
@@ -185,8 +192,9 @@ extension ViewController: UITableViewDataSource {
 		let dequeuedCell = tableView.dequeueReusableCellWithIdentifier("ObjectListCell")
 		let cell = (dequeuedCell as? ObjectListCell) ?? ObjectListCell()
 
-		let key = self.workspace.artboard.allObjects.keys.sort()[indexPath.item]
-		cell.label.text = self.workspace.artboard.allObjects[key]?.name
+		let flattened = self.flattenObjectTree(self.workspace.artboard.root)
+		cell.label.text = flattened[indexPath.item].object.name
+		cell.labelLeadingConstraint.constant = CGFloat(flattened[indexPath.item].depth * 10)
 
 		return cell
 	}
@@ -202,5 +210,6 @@ class ToolCell: UICollectionViewCell {
 }
 
 class ObjectListCell: UITableViewCell {
+	@IBOutlet weak var labelLeadingConstraint: NSLayoutConstraint!
 	@IBOutlet weak var label: UILabel!
 }
