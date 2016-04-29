@@ -28,7 +28,7 @@ class PathPrimitive: Object, Stylable {
 	}
 
 	var styles: [Style] = [
-		OutlineStyle(width: 5, color: UIColor.blackColor().CGColor),
+		OutlineStyle(width: 2, color: UIColor.grayColor().CGColor),
 	]
 
 	var boundingBox: CGRect {
