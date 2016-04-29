@@ -5,7 +5,12 @@ class ViewController: UIViewController {
 	var drawing: Drawing?
 	var overlay: CALayer?
 
-	@IBOutlet var canvasView: UIView!
+	@IBOutlet weak var canvasView: UIView!
+	@IBOutlet weak var objectListView: UITableView! {
+		didSet {
+			self.objectListView.dataSource = self
+		}
+	}
 
 	var canvas: CALayer {
 		return self.canvasView.layer
@@ -126,6 +131,8 @@ class ViewController: UIViewController {
 		updatedDrawing.layer.transform = CATransform3DMakeAffineTransform(self.workspace.viewportTransform)
 		updatedOverlay.transform = CATransform3DMakeAffineTransform(self.workspace.viewportTransform)
 		self.canvas.backgroundColor = self.workspace.viewportColor
+
+		self.objectListView.reloadData()
 	}
 
 
@@ -165,6 +172,26 @@ extension ViewController: UICollectionViewDataSource {
 	}
 }
 
+extension ViewController: UITableViewDataSource {
+	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+		return 1
+	}
+
+	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return self.workspace.artboard.allObjects.count
+	}
+
+	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+		let dequeuedCell = tableView.dequeueReusableCellWithIdentifier("ObjectListCell")
+		let cell = (dequeuedCell as? ObjectListCell) ?? ObjectListCell()
+
+		let key = self.workspace.artboard.allObjects.keys.sort()[indexPath.item]
+		cell.label.text = self.workspace.artboard.allObjects[key]?.name
+
+		return cell
+	}
+}
+
 
 class ToolCell: UICollectionViewCell {
 	@IBOutlet weak var label: UILabel!
@@ -172,4 +199,8 @@ class ToolCell: UICollectionViewCell {
 	override func prepareForReuse() {
 		self.label.text = nil
 	}
+}
+
+class ObjectListCell: UITableViewCell {
+	@IBOutlet weak var label: UILabel!
 }
