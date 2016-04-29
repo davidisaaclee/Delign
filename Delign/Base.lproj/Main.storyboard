@@ -17,25 +17,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="9HL-fp-WZK">
-                                <rect key="frame" x="486" y="40" width="94" height="30"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAP-W8-PKN">
-                                        <rect key="frame" x="0.0" y="0.0" width="38" height="30"/>
-                                        <state key="normal" title="Undo"/>
-                                        <connections>
-                                            <action selector="undo" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="PPa-Yy-Y3r"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRS-jP-bQA">
-                                        <rect key="frame" x="58" y="0.0" width="36" height="30"/>
-                                        <state key="normal" title="Redo"/>
-                                        <connections>
-                                            <action selector="redo" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="wyK-fi-w30"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ReX-Hp-zym">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gGD-3R-alA">
                                 <rect key="frame" x="101" y="530" width="479" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -126,29 +111,59 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="9HL-fp-WZK">
+                                <rect key="frame" x="20" y="40" width="94" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAP-W8-PKN">
+                                        <rect key="frame" x="0.0" y="0.0" width="38" height="30"/>
+                                        <state key="normal" title="Undo"/>
+                                        <connections>
+                                            <action selector="undo" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="PPa-Yy-Y3r"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRS-jP-bQA">
+                                        <rect key="frame" x="58" y="0.0" width="36" height="30"/>
+                                        <state key="normal" title="Redo"/>
+                                        <connections>
+                                            <action selector="redo" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="wyK-fi-w30"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="gGD-3R-alA" firstAttribute="top" secondItem="ReX-Hp-zym" secondAttribute="bottom" id="0Wu-Hd-WQg"/>
                             <constraint firstItem="cih-W8-X7R" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="3rs-NO-GM1"/>
+                            <constraint firstItem="ReX-Hp-zym" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="7ei-AH-HDu"/>
+                            <constraint firstAttribute="trailing" secondItem="ReX-Hp-zym" secondAttribute="trailing" id="Ayv-xW-oIb"/>
                             <constraint firstItem="gGD-3R-alA" firstAttribute="leading" secondItem="cih-W8-X7R" secondAttribute="trailing" constant="10" id="BDa-OF-KTK"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9HL-fp-WZK" secondAttribute="bottom" constant="40" id="BhE-EJ-WTK"/>
+                            <constraint firstItem="9HL-fp-WZK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="Ekv-nK-w54"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="cih-W8-X7R" secondAttribute="bottom" constant="20" id="I3o-ct-EGj"/>
+                            <constraint firstItem="ReX-Hp-zym" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="KXt-f9-XE4"/>
+                            <constraint firstAttribute="bottom" secondItem="ReX-Hp-zym" secondAttribute="bottom" id="Onm-OC-ibn"/>
                             <constraint firstAttribute="trailing" secondItem="gGD-3R-alA" secondAttribute="trailing" constant="20" id="RGF-EE-8De"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gGD-3R-alA" secondAttribute="bottom" constant="20" id="Vka-6i-ugN"/>
                             <constraint firstItem="gGD-3R-alA" firstAttribute="leading" secondItem="9HL-fp-WZK" secondAttribute="trailing" constant="20" id="b1c-B6-OaB"/>
                             <constraint firstAttribute="trailing" secondItem="9HL-fp-WZK" secondAttribute="trailing" constant="20" id="rK2-SC-Xeb"/>
                             <constraint firstItem="9HL-fp-WZK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="40" id="ubB-pq-A0b"/>
                             <constraint firstItem="9HL-fp-WZK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="vRP-gn-Uzk"/>
+                            <constraint firstItem="ReX-Hp-zym" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="vu5-ay-joM"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="7ei-AH-HDu"/>
+                                <exclude reference="rK2-SC-Xeb"/>
                                 <exclude reference="ubB-pq-A0b"/>
+                                <exclude reference="0Wu-Hd-WQg"/>
                                 <exclude reference="b1c-B6-OaB"/>
                                 <exclude reference="BhE-EJ-WTK"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="canvasView" destination="ReX-Hp-zym" id="2gu-1r-Qp5"/>
                         <outlet property="toolsetView" destination="gGD-3R-alA" id="tAa-tm-tpq"/>
                     </connections>
                 </viewController>

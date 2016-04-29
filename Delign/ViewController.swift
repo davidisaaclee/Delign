@@ -5,7 +5,11 @@ class ViewController: UIViewController {
 	var drawing: Drawing?
 	var overlay: CALayer?
 
-	lazy var canvas: CALayer = self.view.layer
+	@IBOutlet var canvasView: UIView!
+
+	var canvas: CALayer {
+		return self.canvasView.layer
+	}
 
 	@IBOutlet weak var toolsetView: UICollectionView! {
 		didSet {
