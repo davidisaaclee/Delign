@@ -17,7 +17,7 @@ class History {
 	}
 
 	var canRedo: Bool {
-		let nextCursor = self.cursor?.successor() ?? 0
+		let nextCursor = self.cursor?.successor() ?? self.items.startIndex
 		return self.items.indices.contains(nextCursor)
 	}
 
@@ -29,7 +29,7 @@ class History {
 		}
 
 		self.items.append(item)
-		self.cursor = self.cursor?.successor() ?? 0
+		self.cursor = self.cursor?.successor() ?? self.items.startIndex
 	}
 
 	func undo(context: Workspace) -> Workspace {
@@ -45,7 +45,7 @@ class History {
 	func redo(context: Workspace) -> Workspace {
 		guard self.canRedo else { return context }
 
-		let cursorʹ = self.cursor?.successor() ?? 0
+		let cursorʹ = self.cursor?.successor() ?? self.items.startIndex
 		let contextʹ = self.items[cursorʹ].redo(context)
 		self.cursor = cursorʹ
 		return contextʹ

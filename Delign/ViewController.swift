@@ -39,39 +39,119 @@ class ViewController: UIViewController {
 
 		self.drawing = self.workspace.artboard.root.updateDrawing(self.drawing)
 		self.canvas.addSublayer(self.drawing!.layer)
+
 		self.canvas.backgroundColor = self.workspace.viewportColor
 	}
 
 	
 	// MARK: - Interaction
 
+	enum InteractionMode {
+		case Navigation(touches: Set<UITouch>)
+		case Tool(touches: Set<UITouch>)
+		case None
+	}
+
+	var interactionMode: InteractionMode = .None {
+		didSet {
+//			switch self.interactionMode {
+//			case .None:
+//				print("None")
+//			case .Tool(let touches):
+//				print("Tool \(touches.count)")
+//			case .Navigation(let touches):
+//				print("Navigation \(touches.count)")
+//			}
+		}
+	}
+
 	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-		let locationInView = touches.first!.locationInView(self.view)
-		let locationInDocument = self.workspace.documentPointFromViewportPoint(locationInView)
-		
-		self.workspace = self.workspace.activeTool.began(atPoint: locationInDocument,
-		                                                 context: self.workspace)
-		self.updateDraw()
+		switch self.interactionMode {
+		case .None:
+			self.interactionMode = (touches.count > 1) ? .Navigation(touches: touches) : .Tool(touches: touches)
+
+		case let .Navigation(touches: previousTouches):
+			self.interactionMode = .Navigation(touches: previousTouches.union(touches))
+
+		case let .Tool(touches: previousTouches):
+			self.interactionMode = .Tool(touches: previousTouches.union(touches))
+		}
+
+
+		switch self.interactionMode {
+		case let .Navigation(touches):
+			break
+
+		case let .Tool(touches):
+			let locationInView = touches.first!.locationInView(self.view)
+			let locationInDocument = self.workspace.documentPointFromViewportPoint(locationInView)
+
+			self.workspace = self.workspace.activeTool.began(atPoint: locationInDocument,
+			                                                 context: self.workspace)
+			self.updateDraw()
+
+		default:
+			break
+		}
 	}
 
 	override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-		let locationInView = touches.first!.locationInView(self.view)
-		let locationInDocument = self.workspace.documentPointFromViewportPoint(locationInView)
+		switch self.interactionMode {
+		case let .Navigation(touches: previousTouches):
+			self.interactionMode = .Navigation(touches: previousTouches.union(touches))
 
-		self.workspace = self.workspace.activeTool.moved(toPoint: locationInDocument,
-		                                                 context: self.workspace)
-		self.updateDraw()
+		case let .Tool(touches: previousTouches):
+			self.interactionMode = .Tool(touches: previousTouches.union(touches))
+
+		default:
+			break
+		}
+
+		switch self.interactionMode {
+		case let .Navigation(touches):
+			break
+
+		case let .Tool(touches):
+			let locationInView = touches.first!.locationInView(self.view)
+			let locationInDocument = self.workspace.documentPointFromViewportPoint(locationInView)
+
+			self.workspace = self.workspace.activeTool.moved(toPoint: locationInDocument,
+			                                                 context: self.workspace)
+			self.updateDraw()
+
+		default:
+			break
+		}
 	}
 
 	override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-		let locationInView = touches.first!.locationInView(self.view)
-		let locationInDocument = self.workspace.documentPointFromViewportPoint(locationInView)
+		switch self.interactionMode {
+		case let .Navigation(touches):
+			break
 
-		self.workspace = self.workspace.activeTool.ended(atPoint: locationInDocument,
-		                                                 context: self.workspace)
-		self.updateDraw()
+		case let .Tool(touches):
+			let locationInView = touches.first!.locationInView(self.view)
+			let locationInDocument = self.workspace.documentPointFromViewportPoint(locationInView)
 
-		self.workspace.activeTool.commit().forEach { self.workspace.history.pushItem($0) }
+			self.workspace = self.workspace.activeTool.ended(atPoint: locationInDocument,
+			                                                 context: self.workspace)
+			self.updateDraw()
+			self.workspace.activeTool.commit().forEach { self.workspace.history.pushItem($0) }
+
+		default:
+			break
+		}
+
+		switch self.interactionMode {
+		case let .Navigation(touches: previousTouches):
+			self.interactionMode = (previousTouches.count == 1) ? .None : .Navigation(touches: previousTouches.subtract(touches))
+
+		case let .Tool(touches: previousTouches):
+			self.interactionMode = (previousTouches.count == 1) ? .None : .Tool(touches: previousTouches.subtract(touches))
+
+		default:
+			break
+		}
 	}
 
 
@@ -92,9 +172,6 @@ class ViewController: UIViewController {
 			var acc = acc
 			acc[elm.id] = elm
 			return acc
-		}
-		let position = objectDict.values.reduce(CGPoint(x: CGFloat.infinity, y: CGFloat.infinity)) {
-			return CGPoint(x: min($0.x, $1.positionX.value), y: min($0.y, $1.positionY.value))
 		}
 		let group = Group(name: "Group",
 		                  children: objectDict,
