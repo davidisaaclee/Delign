@@ -14,9 +14,12 @@ class Group: Object {
 	var positionY: Property
 
 	var boundingBox: CGRect {
+		guard !self.children.isEmpty else { return CGRect.zero }
+
 		return self.children.values
 			.map { $0.boundingBox }
-			.reduce(CGRect.zero, combine: CGRectUnion)
+			.reduce(self.children.values.first!.boundingBox, combine: CGRectUnion)
+			.offsetBy(dx: self.positionX.value, dy: self.positionY.value)
 	}
 
 	init(name: String, children: [String: Object], positionX: Property, positionY: Property) {
@@ -29,6 +32,8 @@ class Group: Object {
 	}
 
 	func drawSelf() -> CALayer {
-		return CALayer()
+		let layer = CALayer()
+		layer.transform = CATransform3DMakeTranslation(self.positionX.value, self.positionY.value, 0)
+		return layer
 	}
 }

@@ -87,6 +87,25 @@ class ViewController: UIViewController {
 		self.updateDraw()
 	}
 
+	@IBAction func group() {
+		let objectDict: [String : Object] = self.workspace.selectionTool.selectedObjects.reduce([:]) { acc, elm in
+			var acc = acc
+			acc[elm.id] = elm
+			return acc
+		}
+		let position = objectDict.values.reduce(CGPoint(x: CGFloat.infinity, y: CGFloat.infinity)) {
+			return CGPoint(x: min($0.x, $1.positionX.value), y: min($0.y, $1.positionY.value))
+		}
+		let group = Group(name: "Group",
+		                  children: objectDict,
+		                  positionX: Properties.make(name: "posX", value: 0),
+		                  positionY: Properties.make(name: "posY", value: 0))
+		self.workspace.selectionTool.selectedObjects.forEach(self.workspace.artboard.removeObject)
+		self.workspace.artboard.addObject(group, parent: nil)
+		self.updateDraw()
+	}
+
+
 	private var poppedTool: Tool?
 
 	@IBAction func enableTranslateTool() {
@@ -185,7 +204,7 @@ extension ViewController: UITableViewDataSource {
 	}
 
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return self.workspace.artboard.allObjects.count
+		return self.flattenObjectTree(self.workspace.artboard.root).count
 	}
 
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

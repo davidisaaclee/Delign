@@ -118,6 +118,13 @@
                                     </mask>
                                 </variation>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RoS-iY-lDs">
+                                <rect key="frame" x="22" y="330" width="43" height="30"/>
+                                <state key="normal" title="Group"/>
+                                <connections>
+                                    <action selector="group" destination="BYZ-38-t0r" eventType="touchUpInside" id="xe0-VX-DQl"/>
+                                </connections>
+                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="cih-W8-X7R">
                                 <rect key="frame" x="20" y="380" width="71" height="200"/>
                                 <subviews>
@@ -185,6 +192,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="cih-W8-X7R" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="3rs-NO-GM1"/>
+                            <constraint firstItem="cih-W8-X7R" firstAttribute="top" secondItem="RoS-iY-lDs" secondAttribute="bottom" constant="20" id="8sL-yF-w2M"/>
                             <constraint firstItem="gGD-3R-alA" firstAttribute="leading" secondItem="cih-W8-X7R" secondAttribute="trailing" constant="10" id="BDa-OF-KTK"/>
                             <constraint firstItem="pHM-1o-Typ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="BOz-rJ-SOi"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9HL-fp-WZK" secondAttribute="bottom" constant="40" id="BhE-EJ-WTK"/>
@@ -198,6 +206,7 @@
                             <constraint firstAttribute="trailing" secondItem="9HL-fp-WZK" secondAttribute="trailing" constant="20" id="rK2-SC-Xeb"/>
                             <constraint firstItem="9HL-fp-WZK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="40" id="ubB-pq-A0b"/>
                             <constraint firstItem="9HL-fp-WZK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="vRP-gn-Uzk"/>
+                            <constraint firstItem="RoS-iY-lDs" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="vVy-hb-xGO"/>
                             <constraint firstAttribute="trailing" secondItem="pHM-1o-Typ" secondAttribute="trailing" id="wPR-zV-uVN"/>
                         </constraints>
                         <variation key="default">
